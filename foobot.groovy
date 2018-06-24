@@ -59,7 +59,7 @@ metadata {
     			attributeState("default", label:'${currentValue}')
 			}
        }
-        valueTile("co2", "device.co2", inactiveLabel: false, width: 2, height: 2, decoration: "flat") {
+        valueTile("carbonDioxide", "device.carbonDioxide", inactiveLabel: false, width: 2, height: 2, decoration: "flat") {
             state "default", label:'${currentValue} CO2 ppm', unit:"ppm"
         }
         valueTile("voc", "device.voc", inactiveLabel: false, width: 2, height: 2, decoration: "flat") {
@@ -89,7 +89,7 @@ metadata {
  		}
 
         main "pollution"
-        details(["pollution","co2","voc","particle","humidity", "temperature", "refresh", "spacerlastUpdatedLeft", "lastUpdated", "spacerlastUpdatedRight"])
+        details(["pollution","carbonDioxide","voc","particle","humidity", "temperature", "refresh", "spacerlastUpdatedLeft", "lastUpdated", "spacerlastUpdatedRight"])
 	}
 }
 
@@ -166,8 +166,8 @@ def poll() {
             sendEvent(name: "temperature", value: tmpround, unit: "°C")
             log.debug "hum: ${resp.data.datapoints[-1][3]}"
             sendEvent(name: "humidity", value: resp.data.datapoints[-1][3] as Integer, unit: "%")
-            log.debug "co2: ${resp.data.datapoints[-1][4]}"
-            sendEvent(name: "co2", value: resp.data.datapoints[-1][4] as Integer, unit: "ppm")
+            log.debug "carbonDioxide: ${resp.data.datapoints[-1][4]}"
+            sendEvent(name: "carbonDioxide", value: resp.data.datapoints[-1][4] as Integer, unit: "ppm")
             log.debug "voc: ${resp.data.datapoints[-1][5]}"
             sendEvent(name: "voc", value: resp.data.datapoints[-1][5] as Integer, unit: "ppb")
             log.debug "allpollu: ${resp.data.datapoints[-1][6]}"
